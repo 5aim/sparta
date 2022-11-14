@@ -13,8 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from typing import Dict
 
 from django.contrib import admin
+from django.http import HttpRequest
 from django.urls import path
 from ninja import NinjaAPI
 
@@ -22,7 +24,7 @@ api = NinjaAPI()  # 인스턴스화시킴
 
 # urls.py 와 view function 이 분리된 형태보다 decorator 형태가 훨씬 가독성이 좋다고 생각
 @api.get("/add")  # view function이 데코레이터를 사용해서 감싸는 방식입니다. (flask와 비슷)
-def add(request, a: int, b: int):
+def add(request: HttpRequest, a: int, b: int) -> Dict[str, int]:
     return {"result": a + b}
 
 
