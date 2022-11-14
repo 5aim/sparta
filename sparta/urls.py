@@ -18,15 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from ninja import NinjaAPI
 
-api = NinjaAPI() # 인스턴스화시킴
+api = NinjaAPI()  # 인스턴스화시킴
 
 # urls.py 와 view function 이 분리된 형태보다 decorator 형태가 훨씬 가독성이 좋다고 생각
-@api.get("/add") # view function이 데코레이터를 사용해서 감싸는 방식입니다. (flask와 비슷)
+@api.get("/add")  # view function이 데코레이터를 사용해서 감싸는 방식입니다. (flask와 비슷)
 def add(request, a: int, b: int):
     return {"result": a + b}
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", api.urls), # api 객체의 urls 를 ‘api/’ 경로에 등록
+    path("api/", api.urls),  # api 객체의 urls 를 ‘api/’ 경로에 등록
 ]
