@@ -30,7 +30,7 @@ jobs:
         # run : 명령어 실행하고 yaml 문법 | (파이프라인)을 사용해 value가 여러줄이라는 것을 의미
       - name: Install Poetry
         run: |
-          curl -sSL https://install.python-poetry.org | python3 -
+          curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.1.0 python3 -
           echo "${HOME}/.poetry/bin" >> $GITHUB_PATH
 
         # 종속성 설치
