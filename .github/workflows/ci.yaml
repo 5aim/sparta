@@ -25,20 +25,13 @@ jobs:
           python-version: 3.9.9
           # 파이썬 설치하고
 
-        # run : 명령어를 실행함.
         # 파이프 라인 (|)을 사용해서 여러줄을 가진 멸티 라인이라는 것을 알려줘야 함.
         # poetry 설치
-
+        # run : 명령어 실행하고 yaml 문법 | (파이프라인)을 사용해 value가 여러줄이라는 것을 의미
       - name: Install Poetry
-          run: |
-            curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python | python
-            echo "${HOME}/.poetry/bin" >> $GITHUB_PATH
-            
-
-#      - name: Install and configure Poetry
-#        uses: snok/install-poetry@v1
-#        with:
-#          installation-arguments: --git https://github.com/python-poetry/poetry.git@69bd6820e320f84900103fdf867e24b355d6aa5d
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+          echo "${HOME}/.poetry/bin" >> $GITHUB_PATH
 
         # 종속성 설치
       - name: Install dependencies
