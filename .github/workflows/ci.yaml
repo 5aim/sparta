@@ -1,0 +1,44 @@
+# 테스트만 되도록 함.
+name: Django CI
+
+# 액션이 언제 실행되는지를 정의
+on:
+  push:
+
+# 하나의 workflows는 여러개의 jobs로 구성됨.
+jobs:
+  # job의 이름.
+  ci:
+    # 이 job이 어디서 실행이 되는지
+    runs-on: ubuntu-latest
+    # 하나의 jobs가 여러가지 steps로 구성됨. steps는 명령어 또는 액션을 실행함.
+    steps:
+      - name: Check out the codes
+        uses: actions/checkout@v2
+        # 코드 체크아웃
+
+      - name: Setup python environment
+        id: setup-python
+        uses: actions/setup-python@v2
+        # uses action에 전달할 파라이터
+        with:
+          python-version: 3.9.9
+          # 파이썬 설치하고
+
+      - name: Install Poetry
+        # run : 명령어를 실행함.
+        # 파이프 라인 (|)을 사용해서 여러줄을 가진 멸티 라인이라는 것을 알려줘야 함.
+        # poetry 설치
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+          echo "${HOME}/.poetry/bin" >> $GITHUB_PATH
+
+        # 종속성 설치
+      - name: Install dependencies
+        run: |
+          ${HOME}/.poetry/bin/poetry install
+
+        # 프로젝트 테스트
+      - name: Test python project
+        run: |
+          poetry run python manage.py test
