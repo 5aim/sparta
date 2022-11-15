@@ -29,9 +29,22 @@ jobs:
         # 파이프 라인 (|)을 사용해서 여러줄을 가진 멸티 라인이라는 것을 알려줘야 함.
         # poetry 설치
       - name: Install Poetry
-        run: |
-          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-          source $HOME/.poetry/env
+          uses: dschep/install-poetry-action@v1.2
+
+      - name: Cache Poetry virtualenv
+          uses: actions/cache@v1
+          id: cache
+          with:
+            path: ~/.virtualenvs
+            key: poetry-$
+            restore-keys: |
+              poetry-$
+
+
+#      - name: Install Poetry
+#        run: |
+#          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+#          source $HOME/.poetry/env
 
         # 종속성 설치
       - name: Install dependencies
