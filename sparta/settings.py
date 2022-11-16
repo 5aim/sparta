@@ -15,6 +15,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from typing import List
 
+import pymysql as pymysql
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -71,14 +73,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "sparta.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+pymysql.install_as_MySQLdb()
+# 위 함수를 실행하면 ENGINE에서 mysql이라도 pymysql을 실행하게 된다.
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "sparta",
+        "USER": "root",
+        "PASSWORD": "77256279",
+        "HOST": "localhost",
+        "PORT": "3306",
     }
 }
 
