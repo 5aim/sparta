@@ -38,6 +38,9 @@ jobs:
         run: |
           echo ${HOME}/.poetry/bin install
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
         # 프로젝트 테스트
       - name: Test python project
         run: |
